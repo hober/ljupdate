@@ -139,6 +139,10 @@
       (when mood
         (add-to-list 'request (cons "prop_current_mood" mood))))
 
+    (let ((location (lj-compose-fetch-field "Location")))
+      (when location
+        (add-to-list 'request (cons "prop_current_location" location))))
+
     (let ((tags (lj-compose-fetch-field "Tags")))
       (when tags
         (add-to-list 'request (cons "prop_taglist" tags))))
@@ -358,6 +362,7 @@ in `html-mode'.")
 
           "Community: " (or (gethash :community values) "") "\n"
           "Mood: " (or (gethash :mood values) "") "\n"
+          "Location: " (or (gethash :location values) "") "\n"
           "Access: " (or (gethash :access values) "public") "\n"
           "Subject: " (or (gethash :subject values) "") "\n"
           "Tags: " (or (gethash :tags values) "") "\n")
