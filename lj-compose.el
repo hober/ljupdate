@@ -40,6 +40,7 @@
 
 (require 'lj-custom)
 (require 'lj-acct)
+(require 'lj-compat)
 (require 'lj-fill)
 (require 'lj-pcomplete)
 (require 'lj-protocol)
@@ -183,7 +184,9 @@
                                              (lj-exp2 friends-group-number)))
                  (add-to-list 'request '("security" . "usemask")))
                 (t
-                 (warn "Unable to understand Access: %s; presuming private.")
+                 (lj-warn
+                  "Unable to understand Access: %s; presuming private."
+                  access)
                  (add-to-list 'request '("security" . "private"))))
         (add-to-list 'request '("security" . "public"))))
 

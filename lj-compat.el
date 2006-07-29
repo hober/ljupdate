@@ -40,5 +40,9 @@
 (defvar lj-coding-system (find-if 'coding-system-p '(utf-8 iso-8859-1))
   "Coding system for use when talking to LiveJournal.")
 
+(if (fboundp 'warn)
+    (defalias 'lj-warn 'warn)
+  (defalias 'lj-warn 'message))
+
 (provide 'lj-compat)
 ;;; lj-compat.el ends here
