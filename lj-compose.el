@@ -277,6 +277,7 @@ in `html-mode'.")
   (mml-mode -1)
   (set (make-local-variable 'message-auto-save-directory) "~/.ljupdate/drafts")
   (lj-pcomplete-setup)
+  (define-key lj-compose-header-mode-map "\t" 'pcomplete)
   (run-hooks 'lj-compose-common-hook)
   (add-hook 'post-command-hook 'lj-compose-check-mode nil t))
 

@@ -36,12 +36,8 @@
 
 (require 'pcomplete)
 
-(eval-when-compile
-  (defvar lj-compose-header-mode-map))
-
 (defun lj-pcomplete-setup ()
   "Configure this buffer for programmable completion."
-  (define-key lj-compose-header-mode-map "\t" 'pcomplete)
   (set (make-local-variable 'pcomplete-termination-string) "")
   (set (make-local-variable 'pcomplete-ignore-case) t)
   (set (make-local-variable 'pcomplete-use-paring) nil)
