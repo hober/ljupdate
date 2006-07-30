@@ -42,10 +42,8 @@
 (require 'lj-protocol)
 (require 'lj-util)
 
-(defconst lj-client-version
-  (concat (if (featurep 'xemacs) "X" "")
-          "Emacs-ljupdate/3.9.0")
-  "The client version to report to the server.")
+;; from ljupdate.el
+(eval-when-compile (defvar lj-client-version))
 
 (defvar lj-last-server nil
   "The last LJ server we used during this Emacs session.")

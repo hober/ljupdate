@@ -36,6 +36,19 @@
 
 (require 'lj-custom)
 
+(defconst lj-client-revision "##revision##"
+  "The Subversion revision of this client.")
+
+(defun lj-client-version ()
+  (format "%s-ljupdate/4.0.%s"
+          (if (featurep 'xemacs) "XEmacs" "Emacs")
+          ;; `lj-client-revision' might be a simple number, or it might
+          ;; be of the form X:YM, where X and Y are revision numbers.
+          (car (split-string lj-client-revision "[:M]" t))))
+
+(defconst lj-client-version (lj-client-version)
+  "The client version to report to the server.")
+
 (provide 'ljupdate)
 
 ;;; Generated autoloads follow (made by autoload.el).
