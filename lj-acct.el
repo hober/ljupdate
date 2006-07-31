@@ -190,13 +190,24 @@ We use our default cache location if FILENAME is nil."
              (lj-acct-hash))
     (nreverse forms)))
 
+(defun lj-make-directory (directory &optional parents modes)
+  "Create DIRECTORY.
+If PARENTS is non-null, create any parent directories as necessary.
+If MODES is null, 0700 are used."
+  (let ((umask (default-file-modes)))
+    (unwind-protect
+        (progn
+          (set-default-file-modes (or modes ?\700))
+          (make-directory dir parents))
+      (set-default-file-modes umask))))
+
 (defun lj-cache-save (&optional filename)
   "Save server and user information out to cache FILENAME.
 We use our default cache location if FILENAME is nil."
   (setq filename (lj-cache-file filename))
   (let ((dir (file-name-directory filename)))
     (unless (file-exists-p dir)
-      (make-directory dir t))
+      (lj-make-directory dir t))
     (unless (file-directory-p dir)
       (error "File `%s' is not a directory" dir)))
   (unless (file-writable-p filename)
