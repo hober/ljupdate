@@ -37,14 +37,18 @@
 (require 'lj-custom)
 
 (defconst lj-client-revision "##revision##"
-  "The Subversion revision of this client.")
+  "The Subversion revision of your ljupdate.")
 
 (defun lj-client-version ()
-  (format "%s-ljupdate/4.0.%s"
-          (if (featurep 'xemacs) "XEmacs" "Emacs")
+  (format "%sEmacs-ljupdate/4.0.%s"
+          (cond ((featurep 'sxemacs) "SX")
+                ((featurep 'xemacs) "X")
+                (t ""))
           ;; `lj-client-revision' might be a simple number, or it might
-          ;; be of the form X:YM, where X and Y are revision numbers.
-          (car (split-string lj-client-revision "[:M]" t))))
+          ;; match X:YM?S?, where X and Y are revision numbers.
+          (apply 'max
+                 (mapcar 'string-to-number
+                         (split-string lj-client-revision "[:MS]")))))
 
 (defconst lj-client-version (lj-client-version)
   "The client version to report to the server.")
