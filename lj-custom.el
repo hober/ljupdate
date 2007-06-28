@@ -39,7 +39,7 @@
   :group 'processes
   :prefix "lj-"
   :link '(url-link "http://edward.oconnor.cx/ljupdate/")
-  :link '(url-link "http://www.livejournal.com/community/ljupdate/"))
+  :link '(url-link "http://community.livejournal.com/ljupdate/"))
 
 (defcustom lj-cache-dir "~/.ljupdate"
   "Directory in which ljupdate saves cached server information."
