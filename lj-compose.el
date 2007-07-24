@@ -105,12 +105,12 @@
          (server (lj-compose-fetch-field "Server"))
          (user   (lj-compose-fetch-field "User"))
 
-                  ;; The current time -- or use the specified time if it exists
-	 (time-field (lj-compose-fetch-field "Time"))
-	 (timestamp (if (eq nil time-field)
-			()
-		      (date-to-time (concat time-field " " (cadr (current-time-zone))))))
-	 
+         ;; The current time -- or use the specified time if it exists
+         (time-field (lj-compose-fetch-field "Time"))
+         (timestamp (if (eq nil time-field)
+                        ()
+                      (date-to-time (concat time-field " " (cadr (current-time-zone))))))
+
          (time (split-string (format-time-string "%Y:%m:%d:%H:%M" timestamp) "[:]"))
          (year (pop time))
          (month (pop time))
@@ -136,9 +136,9 @@
     (add-to-list 'request (cons "user" user))
     (let ((itemid (lj-compose-fetch-field "Itemid")))
       (if itemid
-	(progn (add-to-list 'request (cons "itemid" itemid))
-	       (add-to-list 'request '("mode" . "editevent")))
-	(add-to-list 'request '("mode" . "postevent"))))
+          (progn (add-to-list 'request (cons "itemid" itemid))
+                 (add-to-list 'request '("mode" . "editevent")))
+        (add-to-list 'request '("mode" . "postevent"))))
     (let ((subject (lj-compose-fetch-field "Subject")))
       (when subject
         (add-to-list 'request (cons "subject" subject))))
@@ -210,7 +210,7 @@
     (message "Submitting to `%s' as `%s'. Please wait." server user)
 
     (let ((response (lj-protocol-send-request server request)))
-      (set-buffer buf) ; return to the *LiveJournal* buffer
+      (set-buffer buf)              ; return to the *LiveJournal* buffer
       (if (and (hash-table-p response)
                (string= (gethash "success" response) "OK"))
           (progn
@@ -322,7 +322,7 @@ in `html-mode'.")
             (kbd "C-c C-f C-c") (kbd "C-c C-f C-d")   (kbd "C-c C-f C-f")
             (kbd "C-c C-f C-k") (kbd "C-c C-f C-n")   (kbd "C-c C-f C-o")
             (kbd "C-c C-f C-r") (kbd "C-c C-f C-t")   (kbd "C-c C-f C-u")
-            (kbd "C-c C-f <RET>") ; (kbd "C-c C-f <TAB>")
+            (kbd "C-c C-f <RET>")       ; (kbd "C-c C-f <TAB>")
             (kbd "C-c C-j")     (kbd "C-c C-l")       (kbd "C-c C-n")
             (kbd "C-c C-q")     (kbd "C-c C-r")       (kbd "C-c C-t")
             (kbd "C-c C-u")     (kbd "C-c C-v")       (kbd "C-c C-w")
