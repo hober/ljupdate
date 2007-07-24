@@ -10,7 +10,7 @@ EMACS=emacs -q --no-site-file
 ## Building
 
 SOURCE=lj-acct.el lj-compat.el lj-compose.el lj-custom.el lj-fill.el \
-	lj-login.el lj-pcomplete.el lj-protocol.el lj-util.el
+	lj-login.el lj-pcomplete.el lj-protocol.el lj-util.el lj-edit.el
 TARGET=$(patsubst %.el,%.elc, $(SOURCE) ljupdate.el)
 TARBALL=ljupdate.tar.gz
 

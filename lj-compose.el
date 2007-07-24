@@ -105,8 +105,13 @@
          (server (lj-compose-fetch-field "Server"))
          (user   (lj-compose-fetch-field "User"))
 
-         ;; The current time
-         (time (split-string (format-time-string "%Y:%m:%d:%H:%M") "[:]"))
+                  ;; The current time -- or use the specified time if it exists
+	 (time-field (lj-compose-fetch-field "Time"))
+	 (timestamp (if (eq nil time-field)
+			()
+		      (date-to-time (concat time-field " " (cadr (current-time-zone))))))
+	 
+         (time (split-string (format-time-string "%Y:%m:%d:%H:%M" timestamp) "[:]"))
          (year (pop time))
          (month (pop time))
          (day (pop time))
@@ -118,8 +123,7 @@
 
          ;; The actual request packet, and the response we receive from
          ;; the server.
-         (request (list '("mode"        . "postevent")
-                        '("auth_method" . "challenge")
+         (request (list '("auth_method" . "challenge")
                         '("ver"         . "1")
                         (cons "year" year)
                         (cons "mon" month)
@@ -130,7 +134,11 @@
 
     ;; Build up the request packet.
     (add-to-list 'request (cons "user" user))
-
+    (let ((itemid (lj-compose-fetch-field "Itemid")))
+      (if itemid
+	(progn (add-to-list 'request (cons "itemid" itemid))
+	       (add-to-list 'request '("mode" . "editevent")))
+	(add-to-list 'request '("mode" . "postevent"))))
     (let ((subject (lj-compose-fetch-field "Subject")))
       (when subject
         (add-to-list 'request (cons "subject" subject))))
