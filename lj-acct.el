@@ -198,7 +198,7 @@ If MODES is null, 0700 are used."
     (unwind-protect
         (progn
           (set-default-file-modes (or modes ?\700))
-          (make-directory dir parents))
+          (make-directory directory parents))
       (set-default-file-modes umask))))
 
 (defun lj-cache-save (&optional filename)
