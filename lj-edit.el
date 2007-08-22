@@ -34,13 +34,11 @@
 ;;
 
 ;;; Code:
-(require 'ljupdate)
-(require 'lj-compose)
-
 (require 'cl)
 (require 'message)
 (require 'sendmail)
 
+(require 'lj-compose)
 (require 'lj-custom)
 (require 'lj-acct)
 (require 'lj-fill)
