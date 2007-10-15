@@ -47,9 +47,11 @@
 (require 'lj-login)
 (require 'lj-util)
 
-(defun lj-edit-post (edit-itemid)
+(defun lj-edit-post (&optional edit-itemid)
   (interactive)
-  (message (concat "Editing id: " edit-itemid))
+  (message (if edit-itemid
+	       (concat "Editing id: " edit-itemid)
+	     "Editing last post."))
   (let* ((edit-server (or lj-last-server lj-default-server
                           "www.livejournal.com"))
          (edit-username (or lj-last-username lj-default-username ""))
@@ -57,7 +59,9 @@
                              '("auth_method" . "challenge")
                              '("ver" . "1")
                              '("selecttype" . "one")
-                             (cons "itemid" edit-itemid)
+                             (cons "itemid" (if edit-itemid 
+						edit-itemid
+					      "-1"))
                              ))
          (edit-challenge (lj-getchallenge edit-server)))
     (when (string= edit-username "")
@@ -77,7 +81,8 @@
         (goto-char (- 1 (lj-compose-find-separator)))
         (lj-add-props edit-response edit-server edit-username)
         (goto-char (+ 1 (lj-compose-find-separator)))
-        (insert (replace-regexp-in-string "\r" "" (lj-html-decode-string (gethash "events_1_event" edit-response))))))))
+        (insert (replace-regexp-in-string "\r" "" (lj-html-decode-string (gethash "events_1_event" edit-response))))
+	)))(delete-windows-on "lj-list"))
 
 (defun lj-add-prop (prop value)
   (let ((found-field (message-position-on-field prop)))
@@ -307,6 +312,9 @@
 (defun lj-browse-entries ()
   (interactive)
   (lj-get-last-n 10))
+
+;;;###autoload
+(defalias 'lj-edit-last 'lj-edit-post)
 
 (provide 'lj-edit)
 
