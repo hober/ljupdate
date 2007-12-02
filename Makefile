@@ -41,11 +41,11 @@ pub: $(TARBALL)
 THIRD_PARTY=http-cookies.el http-get.el http-post.el
 fetch: $(THIRD_PARTY)
 
-SAVANNAH_VIEWCVS=http://savannah.nongnu.org/cgi-bin/viewcvs
+SAVANNAH_VIEWCVS=http://cvs.savannah.gnu.org/viewvc
 HTTP_EMACS_SITE=$(SAVANNAH_VIEWCVS)/*checkout*/http-emacs/http-emacs
 
 $(THIRD_PARTY):
-	wget -O $*.el $(HTTP_EMACS_SITE)/$*.el
+	curl -O $(HTTP_EMACS_SITE)/$*.el
 
 ## Cleaning
 
