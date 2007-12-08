@@ -76,6 +76,14 @@
                         'string-lessp)
                   nil nil t))
 
+(defun pcomplete/lj-compose-header-mode/Picture ()
+  "Attempt to complete the Picture header."
+  (pcomplete-here (sort (copy-list (lj-user-get (lj-this-server)
+                                                (lj-this-user)
+                                                :pics))
+                        'string-lessp)
+                  nil nil t))
+
 (defun pcomplete/lj-compose-header-mode/Access ()
   "Attempt to complete the Access header."
   (pcomplete-here (sort
@@ -84,9 +92,8 @@
                     (mapcar 'car
                             (lj-user-get (lj-this-server)
                                          (lj-this-user)
-                                         :friends-groups))
-                    )
-                        'string-lessp)
+                                         :friends-groups)))
+                   'string-lessp)
                   nil nil t))
 
 ;; pcomplete support code
