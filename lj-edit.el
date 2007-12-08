@@ -100,7 +100,6 @@
                 ((string= prop_name "current_music") (lj-add-prop "Music" prop_value))
                 ((string= prop_name "taglist") (lj-add-prop "Tags" prop_value))
                 ((string= prop_name "picture_keyword") (lj-add-prop "Picture" prop_value))
-                ((string= prop_name "picture_keyword") (lj-add-prop "Picture" prop_value))
                 ((and (string= prop_name "opt_nocomments") (string= prop_value "1"))
                  (lj-add-prop "Allow-Comments" "no"))
                 ((and (string= prop_name "opt_noemail") (string= prop_value "1"))

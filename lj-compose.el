@@ -375,6 +375,7 @@ in `html-mode'.")
           "Community: " (or (gethash :community values) "") "\n"
           "Mood: " (or (gethash :mood values) "") "\n"
           "Location: " (or (gethash :location values) "") "\n"
+          "Picture: " (or (gethash :picture values) "") "\n"
           "Access: " (or (gethash :access values) "public") "\n"
           "Subject: " (or (gethash :subject values) "") "\n"
           "Tags: " (or (gethash :tags values) "") "\n")
