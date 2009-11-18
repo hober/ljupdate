@@ -18,7 +18,7 @@ compile: $(TARGET)
 
 ljupdate.el: ljupdate.in $(SOURCE)
 	rm -f ljupdate.elc
-	cat ljupdate.in | sed -e "s/##revision##/`svnversion .`/" > ljupdate.el
+	cp ljupdate.in ljupdate.el
 	@$(EMACS) -batch -l lj-maint.el -f lj-generate-autoloads ljupdate.el .
 
 ## Distribution
